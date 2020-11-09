@@ -1,0 +1,26 @@
+<%= form_with(model: chat, remote: true) do |form| %>
+  <% if chat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+
+      <ul>
+        <% chat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field col-md-6">
+    <%= form.label :message %>
+    <%= form.text_field :message, class: "form-control" %>
+    <%# <%= form.hidden_field :email %>
+    <%= form.hidden_field :first_name, :value => @chat.user.email %>
+
+  </div>
+  <div class="field col-md-6">
+
+    <div class="actions">
+      <%= form.submit 'Send Message', :class => 'btn btn-primary' %>
+    </div>
+  </div>  
+<% end %>
